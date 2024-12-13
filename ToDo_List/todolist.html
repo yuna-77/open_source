@@ -145,14 +145,23 @@ window.addEventListener("load", function(){
 	];
 
 	let htmlString= "";
-	// 템플릿 문자열: 빈 문자열을 만들어 html추가
 
 	let todoList=document.querySelector(".todoList")
 	let addBtn=document.querySelector(".add");
+	let textInput=document.getElementById("textInput");
 
 	// +btn을 click하면 <li>✔|text|-</li>가 생성됩니다.
 	addBtn.addEventListener("click", e => {
 		e.preventDefault();
+
+		// input 필드에 텍스트를 입력하면
+		if()
+
+		// inputField: 사용자가 텍스트를 입력하면 반환
+		let newEntry= { task: textInput.value };
+
+		// 새로운항목(newEntry) add
+		data.push(newEntry);
 
 		data.forEach((data,i) => {
 			htmlString += `
@@ -162,7 +171,6 @@ window.addEventListener("load", function(){
 					<a href="" class="deleteBtn"></a>
 				</li>
 			`
-			//<label>과 <input>이 연결되어야해서 각 input에 고유값(id)을 설정
 		});
 
 		console.log(htmlString);
