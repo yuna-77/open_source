@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>To Do List</title>
+</head>
+<style>
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, table, dl, dd {
+	margin: 0;
+	padding: 0;
+}
+a {
+	text-decoration: none;
+	color: #000;
+}
+ul,ol {
+	list-style: none;
+}
+body {
+	font-family: "Noto Sans KR", sans-serif;
+	font-size: 1em;
+	color: #000;
+}
+
+.wrap {
+	max-width: 500px;
+	margin: 50px auto;
+	background-color: #fefefe;
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+	text-align: center;
+	margin: 0 auto;
+	padding-bottom: 50px;
+}
+header .textInput {
+	display: flex;
+}
+input[type="text"] {
+	padding: 10px;
+	margin-right: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	width: 100%;
+}
+header .textInput .add {
+	padding: 10px 15px;
+	border: none;
+	border-radius: 5px;
+	background-color: #4d6ee4;
+	color: #fefefe;
+	/* font-size: 1.125em; */
+	box-sizing: border-box;
+	cursor: pointer;
+}
+
+.todoList {
+	max-width: 400px;
+	margin: 50px auto;
+	padding: 20px;
+}
+.todoList li {
+	display: flex;
+}
+.todoList #checkbox {
+	padding: 5px;
+}
+.todoList li .textarea {
+	border: none;
+	overflow: hidden;
+}
+
+footer {
+	text-align: right;
+}
+footer .all_delete {
+	padding: 10px 15px;
+	border: none;
+	border-radius: 5px;
+	background-color: #4d6ee4;
+	color: #fefefe;
+	font-weight: 600;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+</style>
+
+<script>
+window.addEventListener("load", function(){
+	// 데이터를 빈배열로 놓고 시작. -> 긁어 와야하기 때문에
+	let data=[];
+
+	let addBtn=document.querySelector(".add");
+
+	// +버튼을 누르면 li가 생성되면서 글이 나온다
+	addBtn.addEventListener("click", () => {
+		//li 생성
+		let li=document.createElement("li");
+		let ul=document.querySelector(".todolist");
+
+		li.innerHTML=`
+			<input type="checkbox" id="checkbox">
+			<span></span>
+		`;
+
+		// <ul>에 <li> 추가
+		li.appendChild(ul);
+
+		// 입력값을 가져오기
+		let text= document.getElementById("textInput");
+
+		text.addEventListener("input", () => {
+	
+
+		})
+		// 그 입력값이 입력이 된다면 글이 추가된다 if
+		// 입력이 안되면 경고표시가 나온다 else
+	});
+
+	// 2-1. 체크박스를 누르면 체크표시가 생기고 줄이 그어진다
+	// 3. 부분 삭제 버튼을 누르면 삭제가 된다
+	// 4. 전체 버튼을 누르면 삭제가 된다
+
+
+});
+</script>
+
+<body>
+	<div class="wrap">
+		<header>
+			<h1>To Do List</h1>
+			<div class="textInput">
+				<input type="text" id="textInput" placeholder="Please write your tasks here" autofocus/>
+				<button class="add">+</button>
+			</div>
+		</header>
+		
+		<ul class="todoList">
+			<!-- li를 비워두고 여기 동적으로 데이터 생성  -->
+			<!-- css -> 체크박스 | text가 들어감 | delete -->
+		</ul>
+		
+		<footer>
+			<button type="button" id="all_delete" class="all_delete">모두 삭제</button>
+		</footer>
+	</div>
+</body>
+</html>
