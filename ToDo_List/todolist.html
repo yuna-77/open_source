@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+	<title>To Do List</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>To Do List</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap">
 </head>
 <style>
 body, h1, h2, h3, h4, h5, h6, p, ul, ol, table, dl, dd {
@@ -18,7 +20,7 @@ ul,ol {
 	list-style: none;
 }
 body {
-	font-family: "Noto Sans KR", sans-serif;
+	font-family: "Open Sans", "Noto Sans KR";
 	font-size: 1em;
 	color: #000;
 }
@@ -37,6 +39,7 @@ header h1 {
 	margin: 0 auto;
 	padding-bottom: 50px;
 }
+
 header .textInput {
 	display: flex;
 }
@@ -59,19 +62,65 @@ header .textInput .add {
 }
 
 .todoList {
+	list-style-type: none;
 	max-width: 400px;
 	margin: 50px auto;
-	padding: 20px;
 }
 .todoList li {
 	display: flex;
 }
-.todoList #checkbox {
-	padding: 5px;
+
+.todoList input[type="checkbox"] {
+	width: 18px;
+	height: 18px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	cursor: pointer;
+	position: relative;
 }
-.todoList li .textarea {
+/* .todoList input[type="checkbox"]:checked {
+	background-color: #4d6ee4;
+	border-radius: 5px;
+}
+.todoList input[type="checkbox"]:checked::after {
+	content: ✔;
+	position: absolute;
+	top: 2px;
+	left: 3px;
+	color: #fff;
+} */
+.todoList input[type="checkbox"]:checked + label {
+	text-decoration: line-through;
+	color: #888;
+}
+.todoList #checkbox {
+	margin-right: 10px;
+	border-radius: 10px;
+}
+
+.todoList label.task_text {
+	width: 100%;
+}
+
+.todoList .deleteBtn {
+	padding: 10px 15px;
 	border: none;
-	overflow: hidden;
+	border-radius: 5px;
+	background-color: #4d6ee4;
+	box-sizing: border-box;
+	font-size: 1.128em;
+	font-weight: 700;
+	margin-left: 20px;
+	cursor: pointer;
+	position: relative;
+}
+.todoList .deleteBtn::after {
+	content: "-";
+	position: absolute;
+	bottom: -1px;
+	left: 35%;
+	color: #fefefe;
+	font-size: 1.125em;
 }
 
 footer {
@@ -91,38 +140,53 @@ footer .all_delete {
 
 <script>
 window.addEventListener("load", function(){
-	// 데이터를 빈배열로 놓고 시작. -> 긁어 와야하기 때문에
-	let data=[];
+	let data=[ 
+		{ task : "task_text" }
+	];
 
+	let htmlString= "";
+	// 템플릿 문자열: 빈 문자열을 만들어 html추가
+
+	let todoList=document.querySelector(".todoList")
 	let addBtn=document.querySelector(".add");
 
-	// +버튼을 누르면 li가 생성되면서 글이 나온다
-	addBtn.addEventListener("click", () => {
-		//li 생성
-		let li=document.createElement("li");
-		let ul=document.querySelector(".todolist");
+	// +btn을 click하면 <li>✔|text|-</li>가 생성됩니다.
+	addBtn.addEventListener("click", e => {
+		e.preventDefault();
 
-		li.innerHTML=`
-			<input type="checkbox" id="checkbox">
-			<span></span>
-		`;
+		/*
+		htmlString += `
+			<li>
+				<input type="checkbox" id="checkbox">
+				<label for="checkbox" class="task_text">메모</label>
+				<a href="" class="deleteBtn"></a>
+			</li>
+		`
+		*/
 
-		// <ul>에 <li> 추가
-		li.appendChild(ul);
+		data.forEach((data,i) => {
+			htmlString += `
+				<li data-key=${i} style="margin-bottom: 13px">
+					<input type="checkbox" id="checkbox">
+					<label for="checkbox" class="task_text">${data.task}</label>
+					<a href="" class="deleteBtn"></a>
+				</li>
+			`
+		});
 
-		// 입력값을 가져오기
-		let text= document.getElementById("textInput");
+		console.log(htmlString);
 
-		text.addEventListener("input", () => {
-	
-
-		})
-		// 그 입력값이 입력이 된다면 글이 추가된다 if
-		// 입력이 안되면 경고표시가 나온다 else
+		todoList.innerHTML=htmlString;
+		//<ul>에 <li>반영
 	});
 
-	// 2-1. 체크박스를 누르면 체크표시가 생기고 줄이 그어진다
-	// 3. 부분 삭제 버튼을 누르면 삭제가 된다
+	// 체크박스를 누르면 체크표시가 생기고 줄이 그어진다 (css구현함)
+
+	// 부분 삭제 버튼을 누르면 삭제가 된다
+	const deleteHandler=() => {
+		
+	};
+
 	// 4. 전체 버튼을 누르면 삭제가 된다
 
 
