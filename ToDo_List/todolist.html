@@ -154,24 +154,15 @@ window.addEventListener("load", function(){
 	addBtn.addEventListener("click", e => {
 		e.preventDefault();
 
-		/*
-		htmlString += `
-			<li>
-				<input type="checkbox" id="checkbox">
-				<label for="checkbox" class="task_text">메모</label>
-				<a href="" class="deleteBtn"></a>
-			</li>
-		`
-		*/
-
 		data.forEach((data,i) => {
 			htmlString += `
 				<li data-key=${i} style="margin-bottom: 13px">
-					<input type="checkbox" id="checkbox">
-					<label for="checkbox" class="task_text">${data.task}</label>
+					<input type="checkbox" id="checkbox-${i}">
+					<label for="checkbox-${i}" class="task_text">${data.task}</label>
 					<a href="" class="deleteBtn"></a>
 				</li>
 			`
+			//<label>과 <input>이 연결되어야해서 각 input에 고유값(id)을 설정
 		});
 
 		console.log(htmlString);
@@ -184,7 +175,7 @@ window.addEventListener("load", function(){
 
 	// 부분 삭제 버튼을 누르면 삭제가 된다
 	const deleteHandler=() => {
-		
+
 	};
 
 	// 4. 전체 버튼을 누르면 삭제가 된다
